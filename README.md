@@ -53,3 +53,44 @@ An interesting observation is that the velocity (and acceleration) of the record
 
 Another observation is that the two signals we sample have "common modes" (same frequency, and phase shifted by 90 degrees. That might be helpful to suppress the influence of bad input data.
 
+Assume we treat the input data stream in chunks of 16 samples.
+
+### System Model
+
+<img src="https://latex.codecogs.com/gif.latex?
+\begin{bmatrix} w(k+1) \\ acc(k+1) \\ A(k+1) \\ B(k+1) \end{bmatrix} = \begin{bmatrix}
+1 & \Delta t & 0 & 0 \\ 
+0 & 1 & 0 & 0 \\ 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix} w(k) \\ acc(k) \\ A(k) \\ B(k) \end{bmatrix} 
+"/> 
+
+Where $w$ is the phase, $acc$ is the phase acceleration. $A$, $B$ are individual is the gains for the input channels (slowly changing).
+
+### Measurement Model
+<img src="https://latex.codecogs.com/gif.latex?
+ \begin{bmatrix}
+x(k) \\ 
+y(k) 
+\end{bmatrix} =
+\begin{bmatrix}
+A(k) \cdot w(k) \cdot sin \left ( w(k) \cdot t + A(k) \right ) \\ 
+A(k) \cdot w(k) \cdot cos \left ( w(k) \cdot t + B(k) \right )
+ \end{bmatrix}
+"/> 
+
+<!-- ### Measurement Model2
+<img src="https://latex.codecogs.com/gif.latex?
+ \begin{bmatrix}
+x(k) \\ 
+y(k) 
+\end{bmatrix} =
+\begin{bmatrix}
+A(k) \cdot sin \left ( w(k) \cdot t + A(k) \right ) \\ 
+A(k) \cdot w(k) \cdot cos \left ( w(k) \cdot t + B(k) \right )
+ \end{bmatrix}
+"/>  -->
+
+
